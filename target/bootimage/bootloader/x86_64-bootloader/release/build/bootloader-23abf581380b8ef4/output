@@ -3,5 +3,5 @@ cargo:rustc-link-search=native=/home/carlo/Code/Rust/O2H2/target/bootimage/bootl
 cargo:rustc-link-lib=static=kernel_bin-o2_h2
 cargo:rerun-if-env-changed=KERNEL
 cargo:rerun-if-env-changed=KERNEL_MANIFEST
-cargo:rerun-if-changed=/home/carlo/Code/Rust/O2H2/target/x86_64-O2H2/debug/o2_h2
+cargo:rerun-if-changed=/home/carlo/Code/Rust/O2H2/target/x86_64-H2O2/debug/o2_h2
 cargo:rerun-if-changed=build.rs
