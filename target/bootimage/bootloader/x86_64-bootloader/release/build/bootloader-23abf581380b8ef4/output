@@ -1,7 +1,0 @@
-cargo:rerun-if-changed=/home/carlo/Code/Rust/O2H2/Cargo.toml
-cargo:rustc-link-search=native=/home/carlo/Code/Rust/O2H2/target/bootimage/bootloader/x86_64-bootloader/release/build/bootloader-23abf581380b8ef4/out
-cargo:rustc-link-lib=static=kernel_bin-should_panic-8c2641d6f09f8d51
-cargo:rerun-if-env-changed=KERNEL
-cargo:rerun-if-env-changed=KERNEL_MANIFEST
-cargo:rerun-if-changed=/home/carlo/Code/Rust/O2H2/target/x86_64-H2O2/debug/deps/should_panic-8c2641d6f09f8d51
-cargo:rerun-if-changed=build.rs
