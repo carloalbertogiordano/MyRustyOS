@@ -4,10 +4,15 @@
 #![test_runner(crate::test_runner)]
 #![reexport_test_harness_main = "test_main"]
 
+#![feature(abi_x86_interrupt)]//EXPERIMENTAL FEATURE! -> Needed for interrupts. see interrupts.rs "x86-interrupt"
+
 use core::panic::PanicInfo;
 
 pub mod serial;
 pub mod vga_buffer;
+
+//Imports the interrupts
+pub mod interrupts;
 
 pub trait Testable {
     fn run(&self) -> ();
@@ -43,6 +48,8 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    use interrupts::init;
+    init();
     test_main();
     loop {}
 }

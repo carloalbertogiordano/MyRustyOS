@@ -23,9 +23,14 @@ fn panic(info: &PanicInfo) -> ! {
     o2_h2::test_panic_handler(info)
 }
 
+
 #[no_mangle] //Disable name mangling so that the function name is really _start
 pub extern "C" fn _start() -> ! { //We have to use C calling conventions instead of Rust calling conventions
     //. Also the function is diverging (CANNOT RETURN), thus the ! return type
+
+    o2_h2::interrupts::init(); //Load exceptions support
+    x86_64::instructions::interrupts::int3();     // invoke a breakpoint exception
+
 
     println!("Hello World{}\n TEST:{}\n IT WORKS!", "!", 1);
     //panic!("THE OS IS STILL WIP");
