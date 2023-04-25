@@ -16,6 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: setup target
+      run: rustup target add x86_64-H2O2
+    - uses: actions/checkout@v3
     - name: setup env
       run: cargo install bootimage
     - uses: actions/checkout@v3
