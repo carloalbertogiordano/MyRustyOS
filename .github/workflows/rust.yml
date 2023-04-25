@@ -15,12 +15,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - with:
-          bootloader: "0.9.23"
-          volatile: "0.2.6"
-          spin: "0.5.2"
-          x86_64: "0.14.2"
-          uart_16550: "0.2.0"
+    - uses: actions/checkout@v3
+    - name: setup env
+      run: cargo install bootimage
     - uses: actions/checkout@v3
     - name: Build
       run: cargo build --verbose
