@@ -28,15 +28,14 @@ fn panic(info: &PanicInfo) -> ! {
 pub extern "C" fn _start() -> ! { //We have to use C calling conventions instead of Rust calling conventions
     //. Also the function is diverging (CANNOT RETURN), thus the ! return type
 
-    o2_h2::interrupts::init(); //Load exceptions support
+    o2_h2::init(); //Load exceptions support
     x86_64::instructions::interrupts::int3();     // invoke a breakpoint exception
 
-
     println!("Hello World{}\n TEST:{}\n IT WORKS!", "!", 1);
-    //panic!("THE OS IS STILL WIP");
 
     #[cfg(test)]
     test_main();
 
     loop {}
+    panic!("THE OS IS STILL WIP");
 }

@@ -11,8 +11,10 @@ use core::panic::PanicInfo;
 pub mod serial;
 pub mod vga_buffer;
 
-//Imports the interrupts
-pub mod interrupts;
+pub mod interrupts; //Imports the interrupts
+
+
+pub mod gdt; //Global descriptor table
 
 pub trait Testable {
     fn run(&self) -> ();
@@ -48,7 +50,6 @@ pub fn test_panic_handler(info: &PanicInfo) -> ! {
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    use interrupts::init;
     init();
     test_main();
     loop {}
@@ -74,4 +75,9 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
         let mut port = Port::new(0xf4);
         port.write(exit_code as u32);
     }
+}
+
+pub fn init() {
+    gdt::init();
+    interrupts::init_idt();
 }
