@@ -14,7 +14,7 @@ use core::panic::PanicInfo;
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    o2_h2::hlt_loop();
 }
 
 #[cfg(test)]
@@ -29,17 +29,15 @@ pub extern "C" fn _start() -> ! { //We have to use C calling conventions instead
     //. Also the function is diverging (CANNOT RETURN), thus the ! return type
 
     o2_h2::init(); //Load exceptions support
-    x86_64::instructions::interrupts::int3();     // invoke a breakpoint exception
-
-    println!("Hello World{}\n TEST:{}\n IT WORKS!", "!", 1);
+    x86_64::instructions::interrupts::int3(); // invoke a breakpoint exception
 
     #[cfg(test)]
     test_main();
 
-    loop { //TODO: This will cause a Deadlock.
-        use o2_h2::print;
-        print!("-");
-    }
+    println!("It did not crash!");
+
+    o2_h2::hlt_loop();  
+
 
     panic!("THE OS IS STILL WIP");
 }
