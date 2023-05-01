@@ -80,4 +80,8 @@ pub fn exit_qemu(exit_code: QemuExitCode) {
 pub fn init() {
     gdt::init();
     interrupts::init_idt();
+    //unsafe because it can cause undefined behavior if the PIC is misconfigured.
+    unsafe { interrupts::PICS.lock().initialize() }; 
+    //Allow CPU to recieve interrupts
+    x86_64::instructions::interrupts::enable(); 
 }

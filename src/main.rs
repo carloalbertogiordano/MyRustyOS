@@ -36,6 +36,10 @@ pub extern "C" fn _start() -> ! { //We have to use C calling conventions instead
     #[cfg(test)]
     test_main();
 
-    loop {}
+    loop { //TODO: This will cause a Deadlock.
+        use o2_h2::print;
+        print!("-");
+    }
+
     panic!("THE OS IS STILL WIP");
 }
