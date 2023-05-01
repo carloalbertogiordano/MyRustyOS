@@ -78,7 +78,7 @@ extern "x86-interrupt" fn timer_interrupt_handler(_stack_frame: InterruptStackFr
 
 
 extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStackFrame) {
-    use pc_keyboard::{layouts, DecodedKey, HandleControl, Keyboard};
+    use pc_keyboard::{DecodedKey, HandleControl, Keyboard};
     use pc_keyboard::layouts::Us104Key;
     use pc_keyboard::ScancodeSet1;
     use crate::interrupts::spin::Mutex;
@@ -104,7 +104,7 @@ extern "x86-interrupt" fn keyboard_interrupt_handler(_stack_frame: InterruptStac
                 DecodedKey::Unicode(character) => {
                     print!("{}", character);
                 },
-                DecodedKey::RawKey(key) => {
+                DecodedKey::RawKey(_key) => {
                     //No usse for thiss now. may have ssome in the future
                 },
             }

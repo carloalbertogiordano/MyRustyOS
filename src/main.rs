@@ -37,7 +37,4 @@ pub extern "C" fn _start() -> ! { //We have to use C calling conventions instead
     println!("It did not crash!");
 
     o2_h2::hlt_loop();  
-
-
-    panic!("THE OS IS STILL WIP");
 }
